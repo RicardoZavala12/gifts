@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0c0f27;
+            overflow: hidden;
+            position: relative;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .moon, .gif-container {
+            width: 150px;
+            height: 150px;
+            background-size: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 20%;
+            animation: glow 1.5s ease-in-out infinite alternate;
+            transition: opacity 1s ease-in-out;
+        }
+        .moon {
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/023/655/353/small/full-moon-transparent-png.png');
+            animation: spin 20s linear infinite, glow 1.5s ease-in-out infinite alternate;
+        }
+        .gif-container {
+            display: none;
+            opacity: 0;
+            top: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+            }
+        }
+        .card {
+            width: 300px;
+            height: 200px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.8s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .message {
+            font-size: 16px;
+            text-align: center;
+            display: none;
+        }
+        .open {
+            transform: translateY(50%);
+        }
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="moon"></div>
+    <div class="gif-container">
+        <img src="https://i.gifer.com/origin/a8/a8dd9a589412507e6da717a211cf83dd_w200.gif" alt="Cat Gif">
+    </div>
+    <div class="card">
+        <div class="message">Buenas noches 🌙✨</div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const numStars = 100;
+            const body = document.body;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                body.appendChild(star);
+            }
+
+            document.addEventListener('click', () => {
+                const moon = document.querySelector('.moon');
+                const gifContainer = document.querySelector('.gif-container');
+                const card = document.querySelector('.card');
+                const message = document.querySelector('.message');
+
+                moon.style.opacity = 0;
+                setTimeout(() => {
+                    moon.style.display = 'none';
+                    gifContainer.style.display = 'block';
+                    setTimeout(() => {
+                        gifContainer.style.opacity = 1;
+                    }, 50);
+                }, 1000);
+
+                card.classList.toggle('open');
+                message.classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>
